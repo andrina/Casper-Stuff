@@ -1,0 +1,7 @@
+#!/bin/bash
+
+#Gathers an average of the System CPU usage load from the output of sar gathered every 15 minutes
+
+SYSTEM=`more /Library/Scripts/BellMedia/sargathering | grep Average | awk 'BEGIN{s=0;}{s=s+$4;}END{print s/NR;}' | awk '{printf("%d\n",$0+=$0<0?-0.5:0.5)}'`
+
+echo "<result>$SYSTEM</result>"
